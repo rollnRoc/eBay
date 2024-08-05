@@ -7,7 +7,6 @@ import java.util.regex.Pattern;
 import eBay.business.abstracts.CustomerService;
 import eBay.dataAccess.abstracts.CustomerDao;
 import eBay.entities.concretes.Customer;
-import eBay.entities.concretes.Customers;
 
 public class CustomerManager implements CustomerService {
 
@@ -30,8 +29,7 @@ public class CustomerManager implements CustomerService {
 	public void program(Customer customer, ArrayList<String> emailss, ArrayList<String> passwords) {
 		int number = 0;
 
-		ArrayList<String> yeniListe = new ArrayList<>();
-		ArrayList<String> yeniPwdListe = new ArrayList<>();
+	
 
 		while (true) {
 
@@ -74,6 +72,10 @@ public class CustomerManager implements CustomerService {
 					}
 					System.out.println(qmail + " has signed up!\n");
 					emailss.add(qmail);
+					passwords.add(pwd);
+					System.out.println("Email database:"+ emailss);
+					System.out.println("Password database:"+ passwords + "\n");
+					
 				}
 
 //				for(String emailItem : emailss) {
@@ -100,10 +102,10 @@ public class CustomerManager implements CustomerService {
 					}
 				}
 				String pwd = this.customerDao.pw(customer.getPassword());
-				for (String i : yeniListe) {
+				for (String i : emailss) {
 					if (i.equals(qmail)) {
-						if (yeniPwdListe.indexOf(pwd) != yeniListe.indexOf(qmail)) {
-							while (yeniPwdListe.indexOf(pwd) != yeniListe.indexOf(qmail)) {
+						if (passwords.indexOf(pwd) != emailss.indexOf(qmail)) {
+							while (passwords.indexOf(pwd) != emailss.indexOf(qmail)) {
 								System.out.println("Wrond Password, Try Again.");
 								pwd = this.customerDao.pw(customer.getPassword());
 							}
@@ -112,7 +114,9 @@ public class CustomerManager implements CustomerService {
 
 						System.out.println(qmail + " signed in successfully!\n");
 
-					} else {
+					} 
+					
+					else {
 						System.out.println(qmail + " not in database. You need to sign up first!\n");
 
 					}

@@ -3,7 +3,7 @@ package eBay.business.abstracts;
 import java.util.ArrayList;
 
 import eBay.entities.concretes.Customer;
-import eBay.entities.concretes.Customers;
+
 
 public interface CustomerService {
 	int menu(Customer customer);
